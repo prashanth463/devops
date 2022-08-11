@@ -3,8 +3,10 @@
   hosts: all
   vars:
     tomcat_home_dir: /opt/tomcat
-    tomcat_shell_dir: /bin/false tomcat
+    tomcat_shell_dir: /bin/false
     tomcat_user: tomcat
+    tomcat_download_url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
+    tomcat_download_location: apache-tomcat-9.0.65.tar.gz
   tasks: 
     - name: installing java-11
       ansible.builtin.apt:
@@ -17,3 +19,11 @@
         create_home: yes
         shell: "{{ tomcat_shell_dir }}"
         home: "{{ tomcat_home_dir }}"
+    - name: install tomcat
+      ansible.builtin.get_url:
+        dest: "{{ tomcat_download_url }}"
+        url: "{{ tomcat_download_location }}"
+    - name: extract tomcat
+      ansible.builtin.unarchive:
+        src: "{{ tomcat_download_location }}"
+        dest: 
