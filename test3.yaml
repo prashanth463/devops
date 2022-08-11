@@ -1,0 +1,11 @@
+- name: install tomcat & java 
+  become: yes
+  hosts: all
+  vars:
+    softwares:
+      - openjdk-8-jdk
+  tasks:
+    - name: install 
+      ansible.bultin.apt:
+        name: {{ softwares }}
+        state: present

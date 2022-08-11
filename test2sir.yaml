@@ -1,0 +1,12 @@
+---
+- name: install utility softwares
+  become: yes
+  hosts: application
+  vars:
+    utilites:
+      - openjdk-8-jdk
+  tasks:
+    - name: install utilites
+      ansible.builtin.apt:
+        name: {{ utilites }}
+        state: present

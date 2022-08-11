@@ -1,0 +1,19 @@
+- name: install tomcat applicaction
+  become: yes
+  hosts: all
+  vars:
+    tomcat_home_dir: /opt/tomcat
+    tomcat_shell_dir: /bin/false tomcat
+    tomcat_user: tomcat
+  tasks: 
+    - name: installing java-11
+      ansible.builtin.apt:
+        name: "{{ java_package_name }}"
+        update_cache: yes
+        state: present
+    - name: creating new user
+      ansible.builtin.user:
+        name: tomcat
+        create_home: yes
+        shell: "{{ tomcat_shell_dir }}"
+        home: "{{ tomcat_home_dir }}"
