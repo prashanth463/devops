@@ -1,0 +1,18 @@
+- name: creating look and debug 
+  become: no
+  hosts: all
+  vars:
+    file:
+      - /tmp/4.sh
+      - /tmp/5.sh
+  tasks: 
+    - name: create lookups with debug
+      ansible.builtin.debug:
+        msg: "creating files {{ file }}"
+    - name: creating sh file
+      ansible.builtin.file:
+        path: "{{ item }}"    
+        state: touch
+      loop: "{{ file }}"
+        
+        

@@ -1,0 +1,10 @@
+       		ANSIBLE
+
+=> when you wants to use ansible, then you need to do
+  
+1) create a vm and set the sudo permissions 
+    ex: <user name> ALL=(ALL:ALL) NOPASSWD:ALL
+2) need to create a ssh id to the communicate the other misson
+   for the without asking the loging paswrd.
+   ex: ssh-keygen 
+       ssh-copy-id  <other mission uname>@ip
