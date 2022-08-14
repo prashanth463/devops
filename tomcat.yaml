@@ -28,11 +28,8 @@
       ansible.builtin.get_url:
         dest: "{{ tomcat_download_location }}"
         url: "{{ tomcat_download_url }}"
-    - name: extract tomcat
-      ansible.builtin.unarchive:
-        src: "{{ tomcat_download_location }}"
-        dest: "{{ tomcat_home_dir }}"
-        remote_src: yes
+      notify:
+        extract tomcat
     - name: create symbolic link
       ansible.builtin.file:
         src: "{{ tomcat_home_dir }}/apache-tomcat-9.0.65"
@@ -57,25 +54,37 @@
       ansible.builtin.copy:
         src: tomcat.service
         dest: "{{ tomcat_service_file_location }}"
-    - name: reload the tomcat service
+    - name: restart the tomcat service
       ansible.builtin.systemd:
         name: "{{ tomcat_user }}"
-        state: restarted
+        state: started
         daemon_reload: yes
         enabled: yes
     - name: copy the tomcat users xml
       ansible.builtin.copy:
         src: tomcat-users.xml
         dest: "{{ tomcat_users_location }}"
+      notify:
+        restart tomcat
     - name: copy manager context xml
       ansible.builtin.copy:
         src: manager-context.xml
         dest: "{{ tomcat_manager_conf_location }}"
+      notify:
+        restart tomcat
     - name: copy host manager context xml
       ansible.builtin.copy:
         src: hostmanager-context.xml
         dest: "{{ tomcat_hostmanager_conf_location }}"
+      notify:
+        restart tomcat
+  handlers:
     - name: restart tomcat
       ansible.builtin.systemd:
         name: tomcat
         state: restarted     
+    - name: extract tomcat
+      ansible.builtin.unarchive:
+        src: "{{ tomcat_download_location }}"
+        dest: "{{ tomcat_home_dir }}"
+        remote_src: yes
