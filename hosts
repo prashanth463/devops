@@ -1,1 +1,9 @@
-10.1.0.5  java_package_name='openjdk-11-jdk'
+[ubuntu]
+10.1.0.7  java_package_name='openjdk-11-jdk'
+
+[centos]
+10.1.0.8  
+
+[webserv]
+10.1.0.7
+10.1.0.8

@@ -18,6 +18,7 @@
         name: "{{ java_package_name }}"
         update_cache: yes
         state: present
+      when: ansible_facts["distribution"]=="ubuntu"
     - name: creating new user
       ansible.builtin.user:
         name: tomcat
