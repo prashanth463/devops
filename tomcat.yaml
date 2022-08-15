@@ -19,6 +19,12 @@
         update_cache: yes
         state: present
       when: ansible_facts["distribution"]=="ubuntu"
+    - name: install java for CentOS
+      ansible.builtin.yum:
+        name: "{{ java_package_name }}"
+        update_cache: yes
+        state: present
+      when: ansible_facts["distribution"]=="CentOS"  
     - name: creating new user
       ansible.builtin.user:
         name: tomcat
@@ -56,9 +62,9 @@
         mode: "+x"
       with_fileglob:
          - "{{ tomcat_home_dir }}/latest/bin/*.sh" 
-    - name: Add service file 
+    - name: tomcat service file 
       ansible.builtin.copy:
-        src: tomcat.service
+        src: "{{ tomcat_service }}"
         dest: "{{ tomcat_service_file_location }}"
     - name: restart the tomcat service
       ansible.builtin.systemd:
