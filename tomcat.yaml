@@ -64,7 +64,7 @@
          - "{{ tomcat_home_dir }}/latest/bin/*.sh" 
     - name: tomcat service file 
       ansible.builtin.copy:
-        src: "{{ tomcat_service }}"
+        src: "{{ source_service }}"
         dest: "{{ tomcat_service_file_location }}"
     - name: restart the tomcat service
       ansible.builtin.systemd:

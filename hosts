@@ -1,9 +1,9 @@
 [ubuntu]
-10.1.0.7  java_package_name='openjdk-11-jdk' tomcat_service='tomcat.service'
+10.1.0.7  java_package_name='openjdk-11-jdk' source_service='tomcat.service'
 
 [centos]
-10.1.0.8  java_package_name='java-11-openjdk-devel'  tomcat_service='tomcat_service'
+10.1.0.8  java_package_name='java-11-openjdk-devel'  source_service='tomcatcent.service'
 
 [webserv]
-10.1.0.7   java_package_name='openjdk-11-jdk' tomcat_service='tomcat.service'
-10.1.0.8   java_package_name='java-11-openjdk-devel'  tomcat_service='tomcat_service'
+10.1.0.7   java_package_name='openjdk-11-jdk' source_service='tomcat.service'
+10.1.0.8   java_package_name='java-11-openjdk-devel'  source_service='tomcatcent.service'
